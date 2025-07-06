@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Interstellar",
+    "description": "Perjalanan epik lintas ruang waktu untuk mencari masa depan manusia.",
+    "genre": ["Sci-Fi", "Adventure"],
+    "duration": "2h 49m",
+    "rating": "9",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/original/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Inception",
+    "description": "Pencuri mimpi mencuri rahasia dari alam bawah sadar.",
+    "genre": ["Action", "Sci-Fi"],
+    "duration": "2h 28m",
+    "rating": "8.5",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg"
+  },
+  {
+    "id": 3,
+    "title": "The Dark Knight",
+    "description": "Batman melawan Joker di tengah chaos Gotham City.",
+    "genre": ["Action", "Crime", "Drama"],
+    "duration": "2h 32m",
+    "rating": "9",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/hZkgoQYus5vegHoetLkCJzb17zJ.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Parasite",
+    "description": "Drama sosial tentang dua keluarga dari kasta berbeda.",
+    "genre": ["Drama", "Thriller"],
+    "duration": "2h 12m",
+    "rating": "9",
+    "agerating": "17+",
+    "poster": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRa9QXcKkW6fhivLE4LjAdeC7CvLFnJk5vRjkK7siVD5TkeXVfU",
+    "banner": "https://image.tmdb.org/t/p/original/hiKmpZMGZsrkA3cdce8a7Dpos1j.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Avengers: Endgame",
+    "description": "Puncak pertempuran Avengers melawan Thanos.",
+    "genre": ["Action", "Adventure", "Sci-Fi"],
+    "duration": "3h 2m",
+    "rating": "8",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg"
+  },
+  {
+    "id": 6,
+    "title": "The Shawshank Redemption",
+    "description": "Persahabatan dan harapan di penjara Shawshank.",
+    "genre": ["Drama"],
+    "duration": "2h 22m",
+    "rating": "7",
+    "agerating": "17+",
+    "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/iNh3BivHyg5sQRPP1KOkzguEX0H.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Forrest Gump",
+    "description": "Kisah hidup Forrest Gump yang sederhana dan penuh keajaiban.",
+    "genre": ["Drama", "Romance"],
+    "duration": "2h 22m",
+    "rating": "7",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/6FfCtAuVAW8XJjZ7eWeLibRLWTw.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Gladiator",
+    "description": "Seorang jenderal Romawi menjadi gladiator untuk balas dendam.",
+    "genre": ["Action", "Adventure", "Drama"],
+    "duration": "2h 35m",
+    "rating": "8",
+    "agerating": "17+",
+    "poster": "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
+    "banner": "https://image.tmdb.org/t/p/original/Ar7QuJ7sJEiC0oP3I8fKBKIQD9u.jpg"
+  },
+  {
+    "id": 9,
+    "title": "The Matrix",
+    "description": "Neo menemukan bahwa hidupnya bukanlah nyata.",
+    "genre": ["Action", "Sci-Fi"],
+    "duration": "2h 16m",
+    "rating": "9",
+    "agerating": "17+",
+    "poster": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/90hf73HF63uYPalG1r8YPzT2hye.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Titanic",
+    "description": "Kisah cinta mengharu antara Jack dan Rose di atas kapal Titanic.",
+    "genre": ["Drama", "Romance"],
+    "duration": "3h 14m",
+    "rating": "8",
+    "agerating": "13+",
+    "poster": "https://image.tmdb.org/t/p/original/5bTWA20cL9LCIGNpde4Epc2Ijzn.jpg",
+    "banner": "https://image.tmdb.org/t/p/w1280/6VmFqApQRyzzIWBxVrQBdbDGdX.jpg"
+  }
+]
