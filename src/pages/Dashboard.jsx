@@ -1,9 +1,7 @@
-// Dashboard.jsx (Super Lengkap & Final)
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { auth, db } from "../firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -37,6 +35,7 @@ const Dashboard = () => {
   });
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [formMode, setFormMode] = useState("hidden"); // 'hidden', 'create', 'edit'
 
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
@@ -44,8 +43,7 @@ const Dashboard = () => {
         const userDocRef = doc(db, "users", user.uid);
         const userDocSnap = await getDoc(userDocRef);
         if (userDocSnap.exists() && userDocSnap.data().role === "admin") {
-          const fullUserData = { uid: user.uid, ...userDocSnap.data() };
-          setUser(fullUserData);
+          setUser({ uid: user.uid, ...userDocSnap.data() });
         } else {
           navigate("/login");
         }
@@ -56,11 +54,9 @@ const Dashboard = () => {
 
     const q = query(collection(db, "movies"));
     const unsubscribeMovies = onSnapshot(q, (querySnapshot) => {
-      const moviesData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setMovies(moviesData);
+      setMovies(
+        querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+      );
       setLoading(false);
     });
 
@@ -87,6 +83,7 @@ const Dashboard = () => {
       poster: "",
       banner: "",
     });
+    setFormMode("hidden");
   };
 
   const handleSubmit = async (e) => {
@@ -97,18 +94,16 @@ const Dashboard = () => {
     }
 
     const dataToSubmit = { ...form };
-
     if (dataToSubmit.genre && typeof dataToSubmit.genre === "string") {
       dataToSubmit.genre = dataToSubmit.genre
         .split(",")
         .map((g) => g.trim())
         .filter((g) => g);
     }
-
     delete dataToSubmit.id;
 
     try {
-      if (form.id) {
+      if (formMode === "edit") {
         await updateDoc(doc(db, "movies", form.id), dataToSubmit);
       } else {
         await addDoc(collection(db, "movies"), {
@@ -130,6 +125,23 @@ const Dashboard = () => {
       movieToEdit.genre = movieToEdit.genre.join(", ");
     }
     setForm(movieToEdit);
+    setFormMode("edit");
+  };
+
+  const handleShowCreateForm = () => {
+    setForm({
+      id: null,
+      title: "",
+      description: "",
+      year: "",
+      genre: "",
+      duration: "",
+      rating: "",
+      agerating: "",
+      poster: "",
+      banner: "",
+    });
+    setFormMode("create");
   };
 
   const handleDelete = async (id) => {
@@ -211,43 +223,75 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {[
-            "title",
-            "year",
-            "description",
-            "genre",
-            "duration",
-            "rating",
-            "agerating",
-            "poster",
-            "banner",
-          ].map((field) => (
-            <input
-              key={field}
-              name={field}
-              type={field === "year" || field === "rating" ? "number" : "text"}
-              value={form[field] || ""}
-              onChange={handleChange}
-              placeholder={
-                field === "genre"
-                  ? "Genre (pisahkan dengan koma)"
-                  : field.charAt(0).toUpperCase() + field.slice(1)
-              }
-              className="bg-white/10 border border-gray-400 text-white placeholder-gray-300 px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required={field === "title" || field === "genre"}
-            />
-          ))}
-          <button
-            type="submit"
-            className="col-span-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl transition"
-          >
-            {form.id ? "Simpan Perubahan" : "Tambah Film"}
-          </button>
-        </form>
+        <div className="mb-8">
+          {formMode === "hidden" && (
+            <button
+              onClick={handleShowCreateForm}
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
+            >
+              <FontAwesomeIcon icon={faPlusCircle} />
+              Tambah Film Baru
+            </button>
+          )}
+
+          {formMode !== "hidden" && (
+            <div className="p-6 bg-white/5 rounded-xl border border-white/20">
+              <h2 className="text-2xl font-bold mb-4 text-center">
+                {formMode === "create"
+                  ? "Tambah Film Baru"
+                  : `Edit Film: ${form.title}`}
+              </h2>
+              <form
+                onSubmit={handleSubmit}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+              >
+                {[
+                  "title",
+                  "year",
+                  "description",
+                  "genre",
+                  "duration",
+                  "rating",
+                  "agerating",
+                  "poster",
+                  "banner",
+                ].map((field) => (
+                  <input
+                    key={field}
+                    name={field}
+                    type={
+                      field === "year" || field === "rating" ? "number" : "text"
+                    }
+                    value={form[field] || ""}
+                    onChange={handleChange}
+                    placeholder={
+                      field === "genre"
+                        ? "Genre (pisahkan dengan koma)"
+                        : field.charAt(0).toUpperCase() + field.slice(1)
+                    }
+                    className="bg-white/10 border border-gray-400 text-white placeholder-gray-300 px-4 py-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required={field === "title" || field === "genre"}
+                  />
+                ))}
+                <div className="col-span-full flex gap-4 mt-4">
+                  <button
+                    type="submit"
+                    className="flex-grow bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-xl transition"
+                  >
+                    {formMode === "create" ? "Simpan Film" : "Simpan Perubahan"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetForm}
+                    className="flex-grow bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 rounded-xl transition"
+                  >
+                    Batal
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {movies.map((movie) => (
