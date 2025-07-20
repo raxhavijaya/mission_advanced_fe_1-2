@@ -1,5 +1,3 @@
-// MelanjutkanFilm.jsx (Final dengan Tombol Detail pada Hover)
-
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -69,7 +67,7 @@ const MelanjutkanFilm = ({ movies }) => {
                       <h3 className="text-white text-lg font-bold line-clamp-1">
                         {movie.title}
                       </h3>
-                      
+
                       <div className="flex items-center gap-x-3 gap-y-1 text-xs text-gray-300 my-1 flex-wrap">
                         <span className="flex items-center gap-1">
                           <FontAwesomeIcon
@@ -79,7 +77,6 @@ const MelanjutkanFilm = ({ movies }) => {
                           {movie.rating}
                         </span>
 
-                        {/* Hapus 'truncate', biarkan browser menanganinya secara alami */}
                         <span>
                           {Array.isArray(movie.genre)
                             ? movie.genre.join(" • ")
@@ -89,10 +86,10 @@ const MelanjutkanFilm = ({ movies }) => {
                       <p className="text-xs text-gray-400 line-clamp-2 mb-3">
                         {movie.description}
                       </p>
-                      {/* --- TOMBOL DITAMBAHKAN KEMBALI DI SINI --- */}
+
                       <button
                         onClick={() => navigate(`/movie/${movie.id}`)}
-                        className="w-full bg-red-600 text-white text-sm font-bold py-2 rounded-lg hover:bg-red-700 transition mt-auto"
+                        className="text-center w-full bg-white/20 text-white text-sm font-bold py-2 rounded-lg backdrop-blur-sm"
                       >
                         Lihat Detail
                       </button>

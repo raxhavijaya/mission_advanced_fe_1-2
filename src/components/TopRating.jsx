@@ -1,5 +1,3 @@
-// src/components/TopRating.jsx (Lengkap & Final)
-
 import React, { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";

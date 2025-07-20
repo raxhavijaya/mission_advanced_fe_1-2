@@ -1,4 +1,3 @@
-// src/components/MovieCard.jsx
 
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +28,7 @@ const MovieCard = ({ movie, user, isFavorited, onToggleFavorite }) => {
       />
 
       {/* Tombol Suka/Favorit */}
-      {/* Hanya tampilkan jika user sudah login */}
+      
       {user && (
         <button
           onClick={handleFavoriteClick}
@@ -42,8 +41,7 @@ const MovieCard = ({ movie, user, isFavorited, onToggleFavorite }) => {
         </button>
       )}
 
-      {/* Badge (opsional) - bisa ditambahkan jika perlu */}
-      {/* <span className="absolute top-2 right-2 z-10 ...">BADGE</span> */}
+     
 
       {/* Konten Teks yang muncul dari bawah saat hover */}
       <div

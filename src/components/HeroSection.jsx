@@ -1,25 +1,23 @@
-// HeroSection.jsx (Sudah Diperbaiki dengan data dari props)
-
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // LANGKAH 1: Impor useNavigate
+import { useNavigate } from "react-router-dom"; 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, EffectFade, Autoplay } from "swiper/modules"; // Tambahkan Autoplay
+import { Pagination, EffectFade, Autoplay } from "swiper/modules"; 
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// LANGKAH 2: Terima 'movies' sebagai props
+
 const HeroSection = ({ movies }) => {
   const [topMovies, setTopMovies] = useState([]);
   const navigate = useNavigate(); // Inisialisasi navigate
 
-  // LANGKAH 3: Gunakan props 'movies' sebagai sumber data
+  
   useEffect(() => {
-    // Pastikan movies tidak kosong sebelum diolah
+   
     if (movies && movies.length > 0) {
-      // Logika sorting Anda sudah benar, kita pakai lagi
+     
       const sorted = [...movies].sort(
         (a, b) => parseFloat(b.rating) - parseFloat(a.rating)
       );
@@ -32,12 +30,12 @@ const HeroSection = ({ movies }) => {
     navigate(`/movie/${movieId}`);
   };
 
-  // Logika ini sudah benar, jika tidak ada film, jangan tampilkan apa-apa
+  
   if (topMovies.length === 0) {
     return null; 
   }
 
-  // UI Anda tidak diubah, hanya datanya yang sekarang dinamis
+  
   return (
     <section className="relative w-full mt-[150px] px-4 md:px-10 ">
       <Swiper
@@ -71,7 +69,7 @@ const HeroSection = ({ movies }) => {
                   <button className="bg-white text-black font-semibold px-5 py-2 rounded-xl hover:bg-gray-200 transition">
                     ▶ Tonton Sekarang
                   </button>
-                  {/* LANGKAH 4: Buat tombol ini fungsional */}
+                  
                   <button 
                     onClick={() => handleDetailsClick(movie.id)}
                     className="bg-white/10 border border-white/30 text-white px-5 py-2 rounded-xl hover:bg-white/20 backdrop-blur-md transition flex items-center gap-2"

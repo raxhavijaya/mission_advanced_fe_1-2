@@ -1,29 +1,46 @@
+import React, { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-import moviesData from "../data/movies.json";
+// Impor komponen MovieCard yang bisa dipakai ulang
+import MovieCard from "./MovieCard";
 
-const RilisBaru = () => {
-  const topRatedMovies = [...moviesData]
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
+const RilisBaru = ({ movies, user, favoriteIds, onToggleFavorite }) => {
+  
+  const newReleaseMovies = useMemo(() => {
+    if (!movies || movies.length === 0) return [];
+
+    // Urutkan berdasarkan field 'createdAt' dari yang terbaru ke terlama
+    return (
+      [...movies]
+        // Pastikan hanya film yang punya data 'createdAt' yang diproses
+        .filter((movie) => movie.createdAt && movie.createdAt.seconds)
+        // Urutkan berdasarkan detik timestamp, dari yang terbesar (terbaru)
+        .sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)
+        .slice(0, 10)
+    ); // Ambil 10 film terbaru
+  }, [movies]);
+
+  if (newReleaseMovies.length === 0) {
+    return null;
+  }
 
   return (
     <section className="px-4 md:px-10 mt-2 mb-10 relative">
       <div className="relative">
         <Swiper
           modules={[Navigation]}
+          // Gunakan nama kelas yang unik untuk navigasi
           navigation={{
-            nextEl: ".swiper-top-prev",
-            prevEl: ".swiper-top-next",
+            prevEl: ".rilis-baru-prev",
+            nextEl: ".rilis-baru-next",
           }}
           spaceBetween={20}
           slidesPerView={2}
@@ -34,33 +51,23 @@ const RilisBaru = () => {
           }}
           className="w-full"
         >
-          {topRatedMovies.map((movie) => (
+          {newReleaseMovies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-lg bg-white/5 backdrop-blur-md">
-                <img
-                  src={movie.poster}
-                  alt={movie.title}
-                  className="w-full h-100 object-cover"
-                />
-
-                {/* Label hanya jika rating >= 8.0 */}
-                {movie.rating >= 8.0 && (
-                  <span className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">
-                    TOP 10
-                  </span>
-                )}
-              </div>
+              {/* Gunakan komponen MovieCard yang sudah ada */}
+              <MovieCard
+                movie={movie}
+                user={user}
+                isFavorited={favoriteIds.has(movie.id)}
+                onToggleFavorite={onToggleFavorite}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
 
-        {/* Tombol kiri */}
-        <button className="swiper-top-next absolute top-1/2 -translate-y-1/2 -left-4 z-10 p-2 bg-white/10 border border-white/30 text-white rounded-full hover:bg-white/20 transition">
+        <button className="rilis-baru-prev absolute top-1/2 -translate-y-1/2 -left-4 z-10 w-10 h-10 flex items-center justify-center bg-white/10 border border-white/30 text-white rounded-full hover:bg-white/20 transition disabled:opacity-0 disabled:cursor-not-allowed">
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-
-        {/* Tombol kanan */}
-        <button className="swiper-top-prev absolute top-1/2 -translate-y-1/2 -right-4 z-10 p-2 bg-white/10 border border-white/30 text-white rounded-full hover:bg-white/20 transition">
+        <button className="rilis-baru-next absolute top-1/2 -translate-y-1/2 -right-4 z-10 w-10 h-10 flex items-center justify-center bg-white/10 border border-white/30 text-white rounded-full hover:bg-white/20 transition disabled:opacity-0 disabled:cursor-not-allowed">
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>

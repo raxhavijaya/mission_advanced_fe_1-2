@@ -1,5 +1,3 @@
-// FilmTrending.jsx (Lengkap & Final dengan Arsitektur yang Benar)
-
 import React, { useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -14,7 +12,7 @@ import {
 // Impor komponen MovieCard yang bisa dipakai ulang
 import MovieCard from "./MovieCard";
 
-// Terima semua props yang dibutuhkan, termasuk onToggleFavorite
+
 const FilmTrending = ({ movies, user, favoriteIds, onToggleFavorite }) => {
   // Logika untuk mengurutkan film trending berdasarkan favoritesCount
   const trendingMovies = useMemo(() => {
@@ -26,7 +24,7 @@ const FilmTrending = ({ movies, user, favoriteIds, onToggleFavorite }) => {
       .slice(0, 10);
   }, [movies]);
 
-  // Tidak ada lagi fungsi toggleFavorite di sini. Dihapus!
+  
 
   if (trendingMovies.length === 0) {
     return null;
@@ -52,7 +50,7 @@ const FilmTrending = ({ movies, user, favoriteIds, onToggleFavorite }) => {
         >
           {trendingMovies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              {/* Gunakan MovieCard dan oper semua props yang diterima */}
+              
               <MovieCard
                 movie={movie}
                 user={user}
